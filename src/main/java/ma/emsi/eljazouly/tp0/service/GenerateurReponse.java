@@ -28,7 +28,7 @@ public class GenerateurReponse implements Serializable { // Serializable car CDI
         if (!this.roleSystemeAffiche && roleSysteme != null) {
             // Ajouter le rôle système en majuscule au début du résultat, suivi d'un saut de ligne.
             resultat += roleSysteme.toUpperCase(Locale.FRENCH) + "\n";
-            This.roleSystemAffiche = true;
+            this.roleSystemeAffiche = true;
         }
         resultat += question.toLowerCase(Locale.FRENCH) + "||";
         return resultat;
