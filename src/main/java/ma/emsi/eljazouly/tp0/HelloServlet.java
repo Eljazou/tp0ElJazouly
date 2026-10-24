@@ -10,7 +10,7 @@ public class HelloServlet extends HttpServlet {
     private String message;
 
     public void init() {
-        message = "Hello World!";
+        message = "Bonjour de la part d'Abdessamad El Jazouly ! Le servlet fonctionne sur Payara 7.";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
