@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet name="css/mycsslayout.css"/>
+    <h:outputScript name="js/script.js" target="head"/>
+    <title>Conversation</title>
+</h:head>
+<h:body>
+    <f:view>
+
+        <!-- Les éventuels messages d'erreur non liés à un champ particulier sont affichés ici en rouge -->
+        <h:messages errorStyle="color: red" showDetail="true" showSummary="false" globalOnly="true"/>
+
+        <h:form id="form">
+
+            <p:outputLabel for="rolesysteme" value="Rôle de l'API : "/>
+            <!-- La valeur choisie dans cette liste déroulante sera affectée
+            à la propriété systemRole du backing bean. Cette liste est figée (disabled)
+            dès qu'une requête a été envoyée au serveur. -->
+            <p:selectOneMenu id="rolesysteme" value="#{bb.roleSysteme}" editable="true"
+                             required="true" requiredMessage="Vous devez indiquer le rôle de l'API"
+                             disabled="#{! bb.roleSystemeChangeable}">
+                <f:selectItems value="#{bb.rolesSysteme}"/>
+            </p:selectOneMenu>
+            <!-- Message d'erreur ici si l'utilisateur oublie d'indiquer un rôle système. -->
+            <h:message for="rolesysteme" errorStyle="color: red" />
+
+            <!-- Si on veut commencer un nouveau chat avec, éventuellement, un autre rôle. -->
+            <h:outputText value="  "/>
+            <h:commandButton value="Nouveau chat" action="#{bb.nouveauChat}" />
+
+            <!-- Les éléments de la page sont disposés en deux colonnes :
+            question et réponse à gauche et historique de la conversation à droite. -->
+            <h:panelGrid id="paneltotal" columns="2" columnClasses="topAligned,topAligned">
+
+                <h:panelGrid id="panelgauche" columns="1">
+                    <h:panelGrid id="questionetreponse" columns="1">
+                        <h:panelGroup>
+                            <h:outputText value="Question :"/>
+                            <button type="button" onclick="copyToClipboard('question')">Copier question</button>
+                            <button type="button" onclick="toutEffacer()">Effacer question et réponse</button>
+                        </h:panelGroup>
+                        <h:inputTextarea id="question" value="#{bb.question}" title="Question"
+                                         cols="50" rows="5"/>
+                        <h:commandButton value="Envoyer la question" action="#{bb.envoyer}"/>
+                        <h:panelGroup>
+                            <h:outputText value="Réponse :"/>
+                            <button type="button" onclick="copyToClipboard('reponse')">Copier réponse</button>
+                        </h:panelGroup>
+                        <h:inputTextarea id="reponse" value="#{bb.reponse}" title="Réponse"
+                                         cols="50" rows="15"/>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+                <h:panelGrid id="paneldroit" columns="1" style="vertical-align: top;">
+                    <h:panelGroup>
+                        <h:outputText value="Conversation :"/>
+                        <button type="button" onclick="copyToClipboard('conversation')">Copier conversation</button>
+                    </h:panelGroup>
+                    <h:inputTextarea id="conversation" rows="30" cols="50" readonly="true"
+                                     value="#{bb.conversation}" title="Conversation entière"/>
+                </h:panelGrid>
+
+            </h:panelGrid>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

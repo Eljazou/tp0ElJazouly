@@ -24,6 +24,12 @@
             <version>11.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Librairie de composants JSF PrimeFaces (depuis la version 16, uniquement Jakarta : plus de classifier) -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>16.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
