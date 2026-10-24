@@ -1,0 +1,6 @@
+/target/
+
+# Fichiers propres à IntelliJ IDEA (particuliers à chaque développeur)
+/.idea/
+*.iml
+/.run/
